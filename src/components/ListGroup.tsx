@@ -3,19 +3,21 @@ import { useState } from "react";
 interface ListGroupProps {
   items: string[];
   heading: string;
+  onSelectItem: (item: string) => void; // onSelectItem(item) function as parameter in props
 }
 
-function ListGroup({ items, heading }: ListGroupProps) {
+function ListGroup({ items, heading, onSelectItem }: ListGroupProps) {
   // state hook: useState(<initial-value>)
   const [selectedIndex, setSelectedIndex] = useState(-1);
   // arr[0] = state variable (selectedItem)
   // arr[1] = setter function - setSelectedIndex() setter for state variable
-  function emptyItemsMessage(items: any) {
-    {
-      /* using && operator to render dynamically */
-    }
-    return items.length === 0 && <p>No item found!!!</p>;
-  }
+  const emptyItemsMessage = (items: string[]) =>
+    items.length === 0 && <p>No item found!!!</p>;
+  //function emptyItemsMessage(items: any) {
+  //  {
+  /* using && operator to render dynamically */
+  //  }
+  //}
   return (
     <>
       {/* <> is shortcut for <Fragment> tag (Using Fragment over div!!!) */}
@@ -31,8 +33,11 @@ function ListGroup({ items, heading }: ListGroupProps) {
                 ? "list-group-item active"
                 : "list-group-item"
             }
-            onClick={() => setSelectedIndex(index)}
             key={index}
+            onClick={() => {
+              setSelectedIndex(index);
+              onSelectItem(item);
+            }}
           >
             {item}
           </li>
