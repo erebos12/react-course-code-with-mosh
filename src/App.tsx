@@ -1,9 +1,10 @@
-import { useState } from "react";
-import Alert from "./components/Alert";
-import Button, { Color } from "./components/button/Button";
-import ListGroup from "./components/listGroups/ListGroup";
-import { SlCalender } from "react-icons/sl";
-import { BiSolidLike } from "react-icons/bi";
+//import { useState } from "react";
+//import Alert from "./components/Alert";
+//import Button, { Color } from "./components/button/Button";
+//import ListGroup from "./components/listGroups/ListGroup";
+//import { SlCalender } from "react-icons/sl";
+//import { BiSolidLike } from "react-icons/bi";
+import Like from "./components/Like";
 
 // function App() {
 //   let items = ["New York", "Tokyio", "Paris", "Berlin", "Frankfurt"];
@@ -47,21 +48,34 @@ import { BiSolidLike } from "react-icons/bi";
 //   );
 // }
 
+// function App() {
+//   const [alertVisible, setAlertVisible] = useState(false);
+//   return (
+//     <div>
+//       {alertVisible && (
+//         <Alert onClose={() => setAlertVisible(false)}>My alert</Alert>
+//       )}
+//       <Button
+//         color={Color.dark}
+//         onClick={() => {
+//           setAlertVisible(true);
+//         }}
+//       >
+//         Button
+//       </Button>
+//     </div>
+//   );
+// }
+
 function App() {
-  const [alertVisible, setAlertVisible] = useState(false);
   return (
     <div>
-      {alertVisible && (
-        <Alert onClose={() => setAlertVisible(false)}>My alert</Alert>
-      )}
-      <Button
-        color={Color.dark}
+      <Like
+        initStatus={true}
         onClick={() => {
-          setAlertVisible(true);
+          console.log("clicked");
         }}
-      >
-        Button
-      </Button>
+      ></Like>
     </div>
   );
 }
