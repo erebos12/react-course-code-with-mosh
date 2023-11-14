@@ -1,4 +1,21 @@
 import { useState } from "react";
+// import styles from "./ListGroup.module.css";
+import styled from "styled-components";
+
+// CSS-in-JS/TS
+const List = styled.ul`
+  list-style: disc;
+  padding: 5px;
+`;
+
+interface ListItemProps {
+  active: boolean;
+}
+
+const Item = styled.li<ListItemProps>`
+  padding: 5px;
+  background: ${(props) => (props.active ? "blue" : "none")};
+`;
 
 interface ListGroupProps {
   items: string[];
@@ -8,7 +25,7 @@ interface ListGroupProps {
 
 function ListGroup({ items, heading, onSelectItem }: ListGroupProps) {
   // state hook: useState(<initial-value>)
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   // arr[0] = state variable (selectedItem)
   // arr[1] = setter function - setSelectedIndex() setter for state variable
   const emptyItemsMessage = (items: string[]) =>
@@ -23,28 +40,22 @@ function ListGroup({ items, heading, onSelectItem }: ListGroupProps) {
       {/* <> is shortcut for <Fragment> tag (Using Fragment over div!!!) */}
       <h1>{heading}</h1>
       {emptyItemsMessage(items)}
-      <ul className="list-group">
-        {/* Since JSX has no for-loop we must use map which converts
-        each item into a list-item <li>...</item> */}
+      <List>
         {items.map((item, index) => (
-          <li
-            className={
-              selectedIndex === index
-                ? "list-group-item active"
-                : "list-group-item"
-            }
-            key={index}
+          <Item
+            active={index === selectedIndex}
+            key={item}
             onClick={() => {
               setSelectedIndex(index);
               onSelectItem(item);
             }}
           >
             {item}
-          </li>
+          </Item>
         ))}
         {/* each li should have a unique 'key=ID'. Here we use the item itself,
         but in real apps you would use a real unique ID */}
-      </ul>
+      </List>
     </>
   );
 }
