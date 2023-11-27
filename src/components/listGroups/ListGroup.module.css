@@ -1,6 +1,7 @@
 .listGroup {
     list-style: none;
     padding: 0;
+    background-color: red;
 }
 
 .container {
